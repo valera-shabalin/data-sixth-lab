@@ -3,28 +3,45 @@
 
 using namespace std;
 
+void Sort(double* arr)
+{
+
+
+    return;
+}
+
 void StartSort(string file_name)
 {
-    ifstream file(file_name);
+    ifstream in(file_name);
+    ofstream out("output.txt");
 
-    if (!file.is_open())
+    if (!in.is_open())
     {
         cout << "Ошибка открытия файла." << endl;
         return;
     }
 
     size_t size = 0;
-
-    file >> size;
-
+    in >> size;
     double* arr = new double[size]();
 
     for (size_t i = 0; i < size; i++)
     {
-        file >> arr[i];
+        in >> arr[i];
     }
 
-    file.close();
+    in.close();
+
+    Sort(arr);
+
+    for (size_t i = 0; i < size; i++)
+    {
+        out << arr[i] << " ";
+    }
+
+    out.close();
+
+    cout << "Данные записаны в файл 'output.txt'" << endl;
 
     return;
 }

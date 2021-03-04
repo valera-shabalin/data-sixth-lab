@@ -3,9 +3,25 @@
 
 using namespace std;
 
-void Sort(double* arr)
+void Sort(size_t _size, double* _arr)
 {
+    double x = 0;
+    size_t j = 0, count = 0;
 
+    for (size_t i = 1; i < _size; i++)
+    {
+        x = _arr[i];
+        j = i;
+        while (j > 0 && _arr[j - 1] > x)
+        {
+            _arr[j] = _arr[j - 1];
+            j--;
+            count++;
+        }
+        _arr[j] = x;
+    }
+
+    cout << "Количество перестановок: " << count << endl;
 
     return;
 }
@@ -32,7 +48,7 @@ void StartSort(string file_name)
 
     in.close();
 
-    Sort(arr);
+    Sort(size, arr);
 
     for (size_t i = 0; i < size; i++)
     {

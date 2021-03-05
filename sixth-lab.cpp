@@ -3,25 +3,27 @@
 
 using namespace std;
 
-void Sort(size_t _size, double* _arr)
+void ShellSort(size_t _size, double* _arr)
 {
-    double x = 0;
-    size_t j = 0, count = 0;
+    double tmp = 0, count = 0;
 
-    for (size_t i = 1; i < _size; i++)
+    cout << "Шаги сортивроки: ";
+
+    for (size_t step = _size / 2; step > 0; step /= 2) 
     {
-        x = _arr[i];
-        j = i;
-        while (j > 0 && _arr[j - 1] > x)
+        for (size_t i = 0; i < _size - step; i++)
         {
-            _arr[j] = _arr[j - 1];
-            j--;
-            count++;
+            for (size_t j = i; j >= 0 && _arr[j] > _arr[j + step]; j--, count++)
+            {
+                tmp = _arr[j];
+                _arr[j] = _arr[j + step];
+                _arr[j + step] = tmp;
+            }
         }
-        _arr[j] = x;
+        cout << step << " ";
     }
 
-    cout << "Количество перестановок: " << count << endl;
+    cout << endl << "Количество перестановок: " << count << endl;
 
     return;
 }
@@ -48,7 +50,7 @@ void StartSort(string file_name)
 
     in.close();
 
-    Sort(size, arr);
+    ShellSort(size, arr);
 
     for (size_t i = 0; i < size; i++)
     {
@@ -80,19 +82,19 @@ int main()
     {
         case 1: 
         {
-            cout << "Сортировка 100 элементов:" << endl;
+            cout << "Сортировка 100 элементов методом Шелла." << endl;
             StartSort("f-input.txt");
             break;
         }
         case 2: 
         {
-            cout << "Сортировка 1000 элементов:" << endl;
+            cout << "Сортировка 1000 элементов методом Шелла." << endl;
             StartSort("s-input.txt");
             break;
         }
         case 3:
         {
-            cout << "Сортировка 10000 элементов:" << endl;
+            cout << "Сортировка 10000 элементов методом Шелла." << endl;
             StartSort("t-input.txt");
             break;
         }
